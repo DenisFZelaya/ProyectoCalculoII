@@ -61,6 +61,7 @@ class MainActivity : AppCompatActivity() {
         // Eventos al presionar los botones
         btnSuma.setOnClickListener(){
             simbolo = "+"
+            OperacionCompleja()
             Calcular(simbolo)
         }
 
@@ -111,6 +112,74 @@ class MainActivity : AppCompatActivity() {
         }
 
         tvResultado.text = resultado
+    }
+
+    fun OperacionCompleja()
+    {
+        var operacion = "2*3+4/2"
+        var resultadoInt: Int = 0
+        var resultado = ""
+
+        var numbers = Regex("[0-9]+").findAll(operacion)
+            .map(MatchResult::value)
+            .toList()
+
+        var simbols = Regex("[^a-zA-Z0-9]+").findAll(operacion)
+            .map(MatchResult::value)
+            .toList()
+
+        var result: Int = 0;
+
+        println("operacion: " + operacion)
+        for (i in simbols.indices){
+
+            println("resut inicial: en iteracion " + i + " : " + result)
+
+            if(simbols[i].toString() == "+"){
+                if(i > 0){
+                    result = result  + Integer.parseInt(numbers[i + 1])
+                }else {
+                    result = Integer.parseInt(numbers[i]) + Integer.parseInt(numbers[i + 1])
+                }
+            }
+
+            if(simbols[i].toString() == "-"){
+                if(i > 0){
+                    result = result - Integer.parseInt(numbers[i + 1])
+                }else {
+                    result = Integer.parseInt(numbers[i]) - Integer.parseInt(numbers[i + 1])
+                }
+            }
+
+            if(simbols[i].toString() == "*"){
+                if(i > 0){
+                    result = result  * Integer.parseInt(numbers[i + 1])
+                }else {
+                    result = Integer.parseInt(numbers[i]) * Integer.parseInt(numbers[i + 1])
+                }
+            }
+
+            if(simbols[i].toString() == "/"){
+                if(i > 0){
+                    result = result / Integer.parseInt(numbers[i + 1])
+                    println("numbers: " + numbers[i + 1])
+                }else {
+                    result = Integer.parseInt(numbers[i]) / Integer.parseInt(numbers[i + 1])
+                }
+            }
+            println("resut: en iteracion " + i + " : " + result)
+        }
+        println("El resultado es: " + result)
+        println(numbers)
+        println(simbols)
+    }
+    fun isNumeric(s: String): Boolean {
+        return try {
+            s.toDouble()
+            true
+        } catch (e: NumberFormatException) {
+            false
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
