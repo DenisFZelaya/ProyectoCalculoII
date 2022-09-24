@@ -44,9 +44,22 @@ class MainActivity : AppCompatActivity() {
         val btnResta = findViewById<Button>(R.id.btnResta)
         val btnDivision = findViewById<Button>(R.id.btnDivision)
         val btnMulti = findViewById<Button>(R.id.btnMulti)
+        val btnOC = findViewById<Button>(R.id.btnOC)
 
         // Eventos al cambiar valores de entrante
+        btnOC.setOnClickListener(){
+            var operacion = findViewById<TextView>(R.id.itOP)
+            println("btn oc presionado" + operacion.text)
+            OperacionCompleja(operacion.text.toString())
+        }
+
         n1.setOnClickListener(){
+            aritmetica.numero1 = Integer.parseInt(n1.text.toString())
+            aritmetica.numero2 = Integer.parseInt(n2.text.toString())
+            Calcular(simbolo)
+        }
+
+        n2.setOnClickListener(){
             aritmetica.numero1 = Integer.parseInt(n1.text.toString())
             aritmetica.numero2 = Integer.parseInt(n2.text.toString())
             Calcular(simbolo)
@@ -61,7 +74,6 @@ class MainActivity : AppCompatActivity() {
         // Eventos al presionar los botones
         btnSuma.setOnClickListener(){
             simbolo = "+"
-            OperacionCompleja()
             Calcular(simbolo)
         }
 
@@ -114,11 +126,9 @@ class MainActivity : AppCompatActivity() {
         tvResultado.text = resultado
     }
 
-    fun OperacionCompleja()
+    fun OperacionCompleja(operacion: String)
     {
-        var operacion = "2*3+4/2"
-        var resultadoInt: Int = 0
-        var resultado = ""
+        var resutadoOC = findViewById<TextView>(R.id.tvResultadoEcuacionCompleja)
 
         var numbers = Regex("[0-9]+").findAll(operacion)
             .map(MatchResult::value)
@@ -130,48 +140,55 @@ class MainActivity : AppCompatActivity() {
 
         var result: Int = 0;
 
-        println("operacion: " + operacion)
-        for (i in simbols.indices){
+        if(simbols.size < 1){
+            resutadoOC.text = "No se encontraron signos de operaciones"
+        }else {
+            for (i in simbols.indices){
 
-            println("resut inicial: en iteracion " + i + " : " + result)
+                println("resut inicial: en iteracion " + i + " : " + result)
 
-            if(simbols[i].toString() == "+"){
-                if(i > 0){
-                    result = result  + Integer.parseInt(numbers[i + 1])
-                }else {
-                    result = Integer.parseInt(numbers[i]) + Integer.parseInt(numbers[i + 1])
+                if(simbols[i].toString() == "+"){
+                    if(i > 0){
+                        result = result  + Integer.parseInt(numbers[i + 1])
+                    }else {
+                        result = Integer.parseInt(numbers[i]) + Integer.parseInt(numbers[i + 1])
+                    }
                 }
+
+                if(simbols[i].toString() == "-"){
+                    if(i > 0){
+                        result = result - Integer.parseInt(numbers[i + 1])
+                    }else {
+                        result = Integer.parseInt(numbers[i]) - Integer.parseInt(numbers[i + 1])
+                    }
+                }
+
+                if(simbols[i].toString() == "*"){
+                    if(i > 0){
+                        result = result  * Integer.parseInt(numbers[i + 1])
+                    }else {
+                        result = Integer.parseInt(numbers[i]) * Integer.parseInt(numbers[i + 1])
+                    }
+                }
+
+                if(simbols[i].toString() == "/"){
+                    if(i > 0){
+                        result = result / Integer.parseInt(numbers[i + 1])
+                        println("numbers: " + numbers[i + 1])
+                    }else {
+                        result = Integer.parseInt(numbers[i]) / Integer.parseInt(numbers[i + 1])
+                    }
+                }
+                println("resut: en iteracion " + i + " : " + result)
             }
 
-            if(simbols[i].toString() == "-"){
-                if(i > 0){
-                    result = result - Integer.parseInt(numbers[i + 1])
-                }else {
-                    result = Integer.parseInt(numbers[i]) - Integer.parseInt(numbers[i + 1])
-                }
-            }
-
-            if(simbols[i].toString() == "*"){
-                if(i > 0){
-                    result = result  * Integer.parseInt(numbers[i + 1])
-                }else {
-                    result = Integer.parseInt(numbers[i]) * Integer.parseInt(numbers[i + 1])
-                }
-            }
-
-            if(simbols[i].toString() == "/"){
-                if(i > 0){
-                    result = result / Integer.parseInt(numbers[i + 1])
-                    println("numbers: " + numbers[i + 1])
-                }else {
-                    result = Integer.parseInt(numbers[i]) / Integer.parseInt(numbers[i + 1])
-                }
-            }
-            println("resut: en iteracion " + i + " : " + result)
+            resutadoOC.text = result.toString();
+            println("El resultado es: " + result)
+            println(numbers)
+            println(simbols)
         }
-        println("El resultado es: " + result)
-        println(numbers)
-        println(simbols)
+
+
     }
     fun isNumeric(s: String): Boolean {
         return try {

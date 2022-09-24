@@ -16,7 +16,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -74,8 +74,8 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/tilN1"
                         android:layout_width="200dp"
-                        android:hint="N1"
                         android:layout_height="wrap_content"
+                        android:hint="N1"
                         android:paddingRight="5dp">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -94,9 +94,9 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/tfN2"
-                        android:hint="N2"
                         android:layout_width="200dp"
                         android:layout_height="wrap_content"
+                        android:hint="N2"
                         android:paddingLeft="5dp">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -187,6 +187,66 @@
 
                 <LinearLayout
                     android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#D2DCC8"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvResultadoEcuacionCompleja"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:autoSizeTextType="none"
+                            android:fontFamily="@font/calculatorfont"
+                            android:includeFontPadding="true"
+                            android:paddingRight="15dp"
+                            android:shadowColor="#AE9494"
+                            android:text="Resultado"
+                            android:textAlignment="textEnd"
+                            android:textSize="50sp" />
+                    </LinearLayout>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tfOP"
+                        android:layout_width="400dp"
+                        android:layout_height="wrap_content"
+                        android:hint="Operacion combinada">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/itOP"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:fontFamily="@font/calculatorfont"
+                            android:text=""
+                            android:textSize="34sp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <Button
+                        android:id="@+id/btnOC"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+
+                        android:padding="5dp"
+                        android:text="Calcular Operacion combinada"
+                        android:textColor="#020202"
+                        android:textColorHighlight="#B63232"
+                        android:textSize="15sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="parent" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="214dp"
                     android:paddingTop="15dp">
 
@@ -264,10 +324,13 @@
                             android:textAlignment="textStart"
                             android:textColor="#FFFFFF"
                             android:textSize="20sp" />
+
                     </LinearLayout>
+
                 </LinearLayout>
 
             </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 
